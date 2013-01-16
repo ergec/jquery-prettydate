@@ -7,5 +7,9 @@ $.extend($.prettyDate.messages, {
 	hours: $.prettyDate.template('{0} saat önce'),
 	yesterday: 'Dün',
 	days: $.prettyDate.template('{0} gün önce'),
-	weeks: $.prettyDate.template('{0} hafta önce')
+	weeks: $.prettyDate.template('{0} hafta önce'),
+	month: '1 ay önce',
+	months: $.prettyDate.template('{0} ay önce'),
+	year: '1 yıl önce',
+	years: $.prettyDate.template('{0} yıl önce')
 });
