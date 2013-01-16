@@ -144,25 +144,44 @@
 
 			messages = $.prettyDate.messages;
 			return dayDiff === 0 && (
-					diff < 60 && messages.now ||
-					diff < 120 && messages.minute ||
-					diff < 3600 && messages.minutes(Math.floor(diff / 60)) ||
-					diff < 7200 && messages.hour ||
-					diff < 86400 && messages.hours(Math.floor(diff / 3600))) ||
-					dayDiff === 1 && messages.yesterday ||
-					dayDiff < 7 && messages.days(dayDiff) ||
-					dayDiff < 8 && messages.week ||
-					dayDiff < 14 && messages.days(dayDiff) ||
-					dayDiff < 30 && messages.weeks(Math.ceil(dayDiff / 7)) ||
-					dayDiff < 32 && messages.month ||
-					dayDiff < 363 && messages.months(Math.ceil(dayDiff / 31)) ||
-					dayDiff <= 380 && messages.year ||
-					dayDiff > 380 && messages.years(Math.ceil(dayDiff / 365));
+				diff < 60 && messages.now ||
+				diff < 120 && messages.minute ||
+				diff < 3600 && messages.minutes(Math.floor(diff / 60)) ||
+				diff < 7200 && messages.hour ||
+				diff < 86400 && messages.hours(Math.floor(diff / 3600))
+			) ||
+			dayDiff < 0 && (
+				dayDiff > -2 && messages.tomorrow ||
+				dayDiff > -7 && messages.daysafter(dayDiff * -1) ||
+				dayDiff > -9 && messages.weekafter ||
+				dayDiff > -30 && messages.weeksafter(Math.ceil(dayDiff * -1 / 7)) ||
+				dayDiff > -40 && messages.monthafter ||
+				dayDiff > -350 && messages.monthsafter(Math.ceil(dayDiff * -1 / 31)) ||
+				dayDiff >= -400 && messages.yearafter ||
+				dayDiff < -400 && messages.yearsafter(Math.ceil(dayDiff * -1 / 365))
+			) ||
+			dayDiff === 1 && messages.yesterday ||
+			dayDiff < 7 && messages.days(dayDiff) ||
+			dayDiff < 8 && messages.week ||
+			dayDiff < 14 && messages.days(dayDiff) ||
+			dayDiff < 30 && messages.weeks(Math.ceil(dayDiff / 7)) ||
+			dayDiff < 32 && messages.month ||
+			dayDiff < 363 && messages.months(Math.ceil(dayDiff / 31)) ||
+			dayDiff <= 380 && messages.year ||
+			dayDiff > 380 && messages.years(Math.ceil(dayDiff / 365));
 		}
 
 	};
 
 	$.prettyDate.messages = {
+		tomorrow: 'Tomorrow',
+		daysafter: $.prettyDate.template('After {0} days'),
+		weekafter: 'After one week',
+		weeksafter: $.prettyDate.template('After {0} weeks'),
+		monthafter: 'After a month',
+		monthsafter: $.prettyDate.template('After {0} months'),
+		yearafter: 'After a year',
+		yearsafter: $.prettyDate.template('After {0} years'),
 		now: 'just now',
 		minute: '1 minute ago',
 		minutes: $.prettyDate.template('{0} minutes ago'),
